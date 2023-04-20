@@ -1,7 +1,7 @@
 package net.esotericsteam.esoterics.networking;
 
 import net.esotericsteam.esoterics.Esoterics;
-import net.esotericsteam.esoterics.networking.packet.C2SPacket;
+import net.esotericsteam.esoterics.networking.packet.ManaC2SPacket;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkDirection;
@@ -27,10 +27,10 @@ public class ModMessages {
 
         INSTANCE = net;
 
-        net.messageBuilder(C2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
-                .decoder(C2SPacket::new)
-                .encoder(C2SPacket::toBytes)
-                .consumerMainThread(C2SPacket::handle)
+        net.messageBuilder(ManaC2SPacket.class, id(), NetworkDirection.PLAY_TO_SERVER)
+                .decoder(ManaC2SPacket::new)
+                .encoder(ManaC2SPacket::toBytes)
+                .consumerMainThread(ManaC2SPacket::handle)
                 .add();
     }
 

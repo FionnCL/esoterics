@@ -1,11 +1,13 @@
-package net.esotericsteam.esoterics.events;
+package net.esotericsteam.esoterics.event;
 
 import net.esotericsteam.esoterics.Esoterics;
+import net.esotericsteam.esoterics.mana.PlayerMana;
 import net.esotericsteam.esoterics.mana.PlayerManaProvider;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.player.Player;
+import net.minecraftforge.common.capabilities.RegisterCapabilitiesEvent;
 import net.minecraftforge.event.AttachCapabilitiesEvent;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.event.entity.player.PlayerEvent;
@@ -23,7 +25,7 @@ public class ModEvents {
     }
 
     @SubscribeEvent
-    public static void onPlayerClones(PlayerEvent.Clone event){
+    public static void onPlayerCloned(PlayerEvent.Clone event){
         if(event.isWasDeath()) {
             event.getOriginal().getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(oldStore -> {
                 event.getOriginal().getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(newStore -> {
@@ -31,6 +33,11 @@ public class ModEvents {
                 });
             });
         }
+    }
+
+    @SubscribeEvent
+    public static void onRegisterCapabilities(RegisterCapabilitiesEvent event){
+        event.register(PlayerMana.class);
     }
 
     @SubscribeEvent
