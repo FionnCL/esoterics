@@ -2,6 +2,7 @@ package net.esotericsteam.esoterics;
 
 import com.mojang.logging.LogUtils;
 import net.esotericsteam.esoterics.item.ModItems;
+import net.esotericsteam.esoterics.networking.ModMessages;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -31,7 +32,7 @@ public class Esoterics
 
     private void commonSetup(final FMLCommonSetupEvent event)
     {
-
+        ModMessages.register();
     }
 
     // You can use EventBusSubscriber to automatically register all static methods in the class annotated with @SubscribeEvent
