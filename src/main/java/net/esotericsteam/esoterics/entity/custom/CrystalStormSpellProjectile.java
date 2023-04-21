@@ -1,4 +1,4 @@
-package net.esotericsteam.esoterics.item.custom;
+package net.esotericsteam.esoterics.entity.custom;
 
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
@@ -10,10 +10,11 @@ import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 
-public class CrystalStormSpellProjectile extends SpellProjectile{
-    private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR = SynchedEntityData.defineId(Arrow.class, EntityDataSerializers.INT);
+public class CrystalStormSpellProjectile extends SpellProjectile {
+    private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR =
+            SynchedEntityData.defineId(Arrow.class, EntityDataSerializers.INT);
 
-    protected CrystalStormSpellProjectile(EntityType<? extends Projectile> entityType, Level level) {
+    public CrystalStormSpellProjectile(EntityType<? extends Projectile> entityType, Level level) {
         super(entityType, level);
     }
 

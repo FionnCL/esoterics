@@ -1,6 +1,7 @@
 package net.esotericsteam.esoterics;
 
 import com.mojang.logging.LogUtils;
+import net.esotericsteam.esoterics.entity.ModEntityTypes;
 import net.esotericsteam.esoterics.item.ModItems;
 import net.esotericsteam.esoterics.networking.ModMessages;
 import net.minecraftforge.api.distmarker.Dist;
@@ -24,8 +25,10 @@ public class Esoterics
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModEntityTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
+
 
         MinecraftForge.EVENT_BUS.register(this);
     }

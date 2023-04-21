@@ -1,12 +1,9 @@
-package net.esotericsteam.esoterics.item.custom;
+package net.esotericsteam.esoterics.entity.custom;
 
-import net.minecraft.util.Mth;
-import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
-import net.minecraft.world.phys.Vec3;
 
 public class SpellProjectile extends Projectile {
     protected SpellProjectile(EntityType<? extends Projectile> entityType, Level level) {
