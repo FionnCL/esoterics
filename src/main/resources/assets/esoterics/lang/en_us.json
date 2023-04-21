@@ -1,4 +1,7 @@
 {
+  "item.esoterics.incantation_bowl": "Incantation Bowl",
+  "item.esoterics.spell_casting_item": "Spell Thing",
+
   "gui.esoterics.mana": "Mana",
   "key.category.esoterics.tutorial": "Esoterics",
   "key.esoterics.add_mana": "Add Mana"
