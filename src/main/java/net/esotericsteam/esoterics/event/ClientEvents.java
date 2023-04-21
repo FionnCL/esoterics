@@ -4,7 +4,9 @@ import net.esotericsteam.esoterics.Esoterics;
 import net.esotericsteam.esoterics.networking.ModMessages;
 import net.esotericsteam.esoterics.networking.packet.ManaC2SPacket;
 import net.esotericsteam.esoterics.util.KeyBinding;
+import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
+import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -17,7 +19,6 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyInput(InputEvent.Key event){
             if(KeyBinding.MANA_KEY.consumeClick()){
-                assert Minecraft.getInstance().player != null;
                 ModMessages.sendToServer(new ManaC2SPacket());
             }
         }

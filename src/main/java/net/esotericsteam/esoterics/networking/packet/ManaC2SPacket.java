@@ -6,9 +6,11 @@ import net.minecraft.network.FriendlyByteBuf;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
-import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.entity.EntityType;
+import net.minecraft.world.entity.MobSpawnType;
+import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.network.NetworkEvent;
 
 import java.util.function.Supplier;
@@ -35,7 +37,7 @@ public class ManaC2SPacket {
             player.getCapability(PlayerManaProvider.PLAYER_MANA).ifPresent(mana -> {
                 mana.addMana(1);
                 level.playSound(null, player.getOnPos(), SoundEvents.GENERIC_SPLASH, SoundSource.PLAYERS);
-                player.sendSystemMessage(Component.translatable("Current Mana: " + mana.getMana()).
+                player.sendSystemMessage(Component.literal("Current Mana: " + mana.getMana()).
                         withStyle(ChatFormatting.AQUA));
             });
         });
