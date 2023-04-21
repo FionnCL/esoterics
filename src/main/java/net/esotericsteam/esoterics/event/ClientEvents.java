@@ -1,6 +1,7 @@
 package net.esotericsteam.esoterics.event;
 
 import net.esotericsteam.esoterics.Esoterics;
+import net.esotericsteam.esoterics.client.ManaHudOverlay;
 import net.esotericsteam.esoterics.networking.ModMessages;
 import net.esotericsteam.esoterics.networking.packet.ManaC2SPacket;
 import net.esotericsteam.esoterics.util.KeyBinding;
@@ -8,6 +9,7 @@ import net.minecraft.ChatFormatting;
 import net.minecraft.client.Minecraft;
 import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +31,11 @@ public class ClientEvents {
         @SubscribeEvent
         public static void onKeyRegister(RegisterKeyMappingsEvent event){
             event.register(KeyBinding.MANA_KEY);
+        }
+
+        @SubscribeEvent
+        public static void registerGuiOverlays(RegisterGuiOverlaysEvent event){
+            event.registerAboveAll("mana", ManaHudOverlay.HUD_MANA);
         }
     }
 }
