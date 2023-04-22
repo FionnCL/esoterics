@@ -5,16 +5,15 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
-import net.minecraft.world.entity.projectile.Arrow;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 
 public class CrystalStormSpellProjectile extends SpellProjectile {
     private static final EntityDataAccessor<Integer> ID_EFFECT_COLOR =
-            SynchedEntityData.defineId(Arrow.class, EntityDataSerializers.INT);
+            SynchedEntityData.defineId(CrystalStormSpellProjectile.class, EntityDataSerializers.INT);
 
-    public CrystalStormSpellProjectile(EntityType<? extends Projectile> entityType, Level level) {
+    public CrystalStormSpellProjectile(EntityType<? extends SpellProjectile> entityType, Level level) {
         super(entityType, level);
     }
 
