@@ -20,7 +20,11 @@ public class ModEntityTypes {
             ENTITY_TYPES.register(
                     "crystal_storm_spell_projectile",
                     () -> EntityType.Builder
-                            .of(CrystalStormSpellProjectile::new, MobCategory.MISC)
+                            .of(
+                                    (EntityType.EntityFactory<CrystalStormSpellProjectile>)
+                                            CrystalStormSpellProjectile::new,
+                                    MobCategory.MISC
+                            )
                             .sized(5F, 5F)
                             .build(new ResourceLocation(Esoterics.MOD_ID, "crystal_storm_spell_projectile").toString())
             );
