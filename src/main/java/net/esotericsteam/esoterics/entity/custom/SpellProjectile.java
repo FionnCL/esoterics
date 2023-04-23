@@ -1,27 +1,39 @@
 package net.esotericsteam.esoterics.entity.custom;
 
+import net.minecraft.core.particles.ParticleOptions;
+import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
+import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.Fireball;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraftforge.network.NetworkHooks;
 
-public class SpellProjectile extends Projectile {
-    protected SpellProjectile(EntityType<? extends Projectile> entityType, Level level) {
+public abstract class SpellProjectile extends AbstractHurtingProjectile {
+    public SpellProjectile(EntityType<? extends SpellProjectile> entityType, Level level) {
         super(entityType, level);
     }
 
-    protected SpellProjectile(EntityType<? extends Projectile> entityType, double x, double y, double z, Level level) {
-        this(entityType, level);
-        this.setPos(x, y, z);
+    public SpellProjectile(EntityType<? extends SpellProjectile> entityType, double d0, double d1, double d2, double d3, double d4, double d5, Level level) {
+        super(entityType, d0, d1, d2, d3, d4, d5, level);
     }
 
-    protected SpellProjectile(EntityType<? extends Projectile> entityType, LivingEntity livingEntity, Level level) {
-        this(entityType, livingEntity.getX(), livingEntity.getEyeY() - (double)0.1F, livingEntity.getZ(), level);
-        this.setOwner(livingEntity);
+    public SpellProjectile(EntityType<? extends SpellProjectile> entityType, LivingEntity livingEntity, double d0, double d1, double d2, Level level) {
+        super(entityType, livingEntity, d0, d1, d2, level);
+    }
+
+    @Override
+    protected boolean shouldBurn() {
+        return false;
+    }
+
+    @Override
+    protected ParticleOptions getTrailParticle() {
+        return ParticleTypes.SMOKE;
     }
 
     @Override

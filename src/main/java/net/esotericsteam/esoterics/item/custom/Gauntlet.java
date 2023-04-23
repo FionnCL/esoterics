@@ -5,20 +5,34 @@ import net.esotericsteam.esoterics.entity.custom.CrystalStormSpellProjectile;
 import net.esotericsteam.esoterics.entity.custom.SpellProjectile;
 import net.esotericsteam.esoterics.item.client.GauntletRenderer;
 import net.esotericsteam.esoterics.util.ModTags;
+import net.minecraft.Util;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
+import net.minecraft.core.Direction;
+import net.minecraft.core.Position;
+import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
+import net.minecraft.util.Mth;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
+import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.MoverType;
+import net.minecraft.world.entity.monster.Blaze;
+import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.entity.projectile.AbstractArrow;
+import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.entity.projectile.Arrow;
+import net.minecraft.world.entity.projectile.SmallFireball;
 import net.minecraft.world.item.*;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
 import software.bernie.geckolib.animatable.GeoItem;
@@ -28,71 +42,57 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.RenderUtils;
 
+import java.text.DecimalFormat;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
+    protected final RandomSource random = RandomSource.create();
 
     public Gauntlet(Properties properties) {
         super(properties);
     }
 
-    public SpellProjectile customProjectile(SpellProjectile spell) {
-        return spell;
-    }
-
-    @Override
-    public int getDefaultProjectileRange() {
-        return 15;
-    }
-
-    public SpellProjectile createSpellProjectile(Level level, LivingEntity livingEntity) {
+    public SpellProjectile createSpellProjectile(Level level, LivingEntity livingEntity, double d1, double d2, double d3) {
         // FIXME: Hard Coded to return only 1 type of spell.
         return new CrystalStormSpellProjectile(
-                ModEntityTypes.CRYSTAL_STORM_SPELL_PROJECTILE.get(),
+                level,
                 livingEntity,
-                level
+                d1,
+                d2,
+                d3
         );
     }
 
     @Override
     public @NotNull InteractionResultHolder<ItemStack> use(Level level, Player player, InteractionHand interactionHand) {
         if(!level.isClientSide() && interactionHand == InteractionHand.MAIN_HAND) {
-//            // FIXME: Almost carbon-copy of ProjectileWeaponItem
-//            ItemStack stack = player.getItemInHand(interactionHand);
-//
-//            // FIXME: Possibly doesn't work; gets supported projectiles.
-//            // Possibly check for mana below.
-//            boolean flag = false;
-//
-//            // FIXME: Use hasAmmo to denote mana!
-//            //onArrowNock(ItemStack item, Level level, Player player, InteractionHand hand, boolean hasAmmo)
-//            InteractionResultHolder<ItemStack> ret = net.minecraftforge.event.ForgeEventFactory.onArrowNock(
-//                    stack, level, player, interactionHand, true
-//            );
-//
-//            if (ret != null) return ret;
-//
-//            if (!player.getAbilities().instabuild && !flag) {
-//                return InteractionResultHolder.fail(stack);
-//            } else {
-//                player.startUsingItem(interactionHand);
-//                return new InteractionResultHolder<>(InteractionResult.CONSUME, stack);
-//            }
-//            //Adding a cool-down could be a good idea for balancing, we'll see.
-            ItemStack itemStack = new ItemStack(this);
-            CrystalStormSpellProjectile spell = new CrystalStormSpellProjectile(ModEntityTypes.CRYSTAL_STORM_SPELL_PROJECTILE.get(), player, level);
-            spell.setDeltaMovement(0, 1, 0); // directly up
+            Vec3 vec3 = player.getLookAngle();
 
-            //SpellProjectile abstractSpellProjectile = createSpellProjectile(level, player);
-            spell.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, 3.0F, 1.0F);
+            double d0 = 1; // This denotes distance, which I don't believe matters.
+            double d1 = (player.getX() + vec3.x * 10) - player.getX();
+            double d2 = ((player.getY() + (player.getBbHeight() * 0.5D)) + (vec3.y * 10)) - player.getY(0.5D);
+            double d3 = (player.getZ() + vec3.z * 10) - player.getZ();
+            double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
 
-            itemStack.hurtAndBreak(1, player, (playerCallback) -> {
-                playerCallback.broadcastBreakEvent(player.getUsedItemHand());
-            });
-            
-            player.level.addFreshEntity(spell);
+            DecimalFormat df = new DecimalFormat("#.###");
+            player.sendSystemMessage(Component.literal("-------------"));
+            player.sendSystemMessage(Component.literal("vec3.x: " + df.format(vec3.x)));
+            player.sendSystemMessage(Component.literal("vec3.y: " + df.format(vec3.y)));
+            player.sendSystemMessage(Component.literal("vec3.z: " + df.format(vec3.z)));
+            player.sendSystemMessage(Component.literal("-------------"));
+
+            SpellProjectile spell = createSpellProjectile(
+                    level,
+                    player,
+                    player.getRandom().triangle(d1, 0.01F * d4),
+                    d2,
+                    player.getRandom().triangle(d3, 0.01F * d4)
+            );
+
+            spell.setPos(spell.getX(), player.getY(0.5D) + 0.5D, spell.getZ());
+            level.addFreshEntity(spell);
 
             level.playSound(
                         (Player)null,
@@ -106,76 +106,13 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
                 );
             player.awardStat(Stats.ITEM_USED.get(this));
         }
+
         return super.use(level, player, interactionHand);
     }
 
-//    public void releaseUsing(ItemStack stack, Level level, LivingEntity livingEntity, int release) {
-//        // FIXME: Literally carbon-copy of BowItem.
-//        if (livingEntity instanceof Player player) {
-//            ItemStack itemstack = player.getProjectile(stack);
-//            // If player in creative, doesn't need ammo???
-//            boolean flag = player.getAbilities().instabuild;
-//
-//            int i = this.getUseDuration(stack) - release;
-//            i = net.minecraftforge.event.ForgeEventFactory.onArrowLoose(stack, level, player, i, flag);
-//
-//            if (i < 0) return;
-//
-//            float f = getPowerForTime(i);
-//            if (!((double)f < 0.1D)) {
-//                boolean flag1 = player.getAbilities().instabuild;
-//                if (!level.isClientSide) {
-//                    SpellProjectile abstractSpellProjectile = createSpellProjectile(level, player);
-//                    abstractSpellProjectile.shootFromRotation(player, player.getXRot(), player.getYRot(), 0.0F, f * 3.0F, 1.0F);
-//
-//                    stack.hurtAndBreak(1, player, (p_276007_) -> {
-//                        p_276007_.broadcastBreakEvent(player.getUsedItemHand());
-//                    });
-//
-//                    level.addFreshEntity(abstractSpellProjectile);
-//                }
-//
-//                level.playSound(
-//                        (Player)null,
-//                        player.getX(),
-//                        player.getY(),
-//                        player.getZ(),
-//                        SoundEvents.BLAZE_SHOOT,
-//                        SoundSource.PLAYERS,
-//                        1.0F,
-//                        1.0F / (level.getRandom().nextFloat() * 0.4F + 1.2F) + f * 0.5F
-//                );
-//
-//                // TODO: Implement below, but using mana, maybe?
-//                 //Removes arrow when shot, if the player isn't in creative mode.
-//                    if (!flag1 && !player.getAbilities().instabuild) {
-//                        itemstack.shrink(1);
-//                        if (itemstack.isEmpty()) {
-//                            player.getInventory().removeItem(itemstack);
-//                        }
-//                    }
-//
-//                player.awardStat(Stats.ITEM_USED.get(this));
-//            }
-//        }
-//    }
-
-    public static float getPowerForTime(int p_40662_) {
-        float f = (float)p_40662_ / 20.0F;
-        f = (f * f + f * 2.0F) / 3.0F;
-        if (f > 1.0F) {
-            f = 1.0F;
-        }
-
-        return f;
-    }
-
-    public int getUseDuration(ItemStack itemStack) {
-        return 72;
-    }
-
-    public UseAnim getUseAnimation(ItemStack itemStack) {
-        return UseAnim.NONE;
+    @Override
+    public int getDefaultProjectileRange() {
+        return 15;
     }
 
     @Override
