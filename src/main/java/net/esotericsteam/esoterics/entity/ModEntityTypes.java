@@ -25,7 +25,7 @@ public class ModEntityTypes {
                                             CrystalStormSpellProjectile::new,
                                     MobCategory.MISC
                             )
-                            .sized(5F, 5F)
+                            .sized(0.5F, 0.5F)
                             .build(new ResourceLocation(Esoterics.MOD_ID, "crystal_storm_spell_projectile").toString())
             );
 
