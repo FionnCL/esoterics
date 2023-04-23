@@ -17,7 +17,7 @@ public class ModItems {
             () -> new Item(new Item.Properties().stacksTo(1)));
 
     // Advanced Items
-    public static final RegistryObject<Item> SPELL_CASTING_ITEM = ITEMS.register("gauntlet",
+    public static final RegistryObject<Item> GAUNTLET = ITEMS.register("gauntlet",
             () -> new Gauntlet(new Item.Properties().stacksTo(1)));
 
     public static void register(IEventBus eventBus){
