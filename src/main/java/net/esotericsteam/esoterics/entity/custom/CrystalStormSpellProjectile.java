@@ -1,5 +1,7 @@
 package net.esotericsteam.esoterics.entity.custom;
 
+import net.esotericsteam.esoterics.entity.ModEntityTypes;
+import net.esotericsteam.esoterics.item.ModItems;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -31,6 +33,6 @@ public class CrystalStormSpellProjectile extends SpellProjectile {
     // TODO: Edit this test function.
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
-        entityHitResult.getEntity().causeFallDamage(100, 100, DamageSource.CACTUS);
+        entityHitResult.getEntity().spawnAtLocation(ModItems.INCANTATION_BOWL.get());
     }
 }
