@@ -101,7 +101,7 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
 
     // Animations
     private PlayState predicate(AnimationState animationState){
-        animationState.getController().setAnimation(RawAnimation.begin().then("GauntletOrb", Animation.LoopType.LOOP));
+        animationState.getController().setAnimation(RawAnimation.begin().then("idle", Animation.LoopType.LOOP));
         return PlayState.CONTINUE;
     }
 

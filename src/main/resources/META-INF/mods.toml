@@ -56,11 +56,18 @@ Prototype magic mod for minecraft.
     ordering="NONE"
     # Side this dependency is applied on - BOTH, CLIENT or SERVER
     side="BOTH"
+# A dependency - use the . to indicate dependency for a specific modid. Dependencies are optional.
+[[dependencies.esoterics]] #optional
+modId="geckolib" #mandatory
+mandatory=true #mandatory
+versionRange="[4.1.2,)" #mandatory
+ordering="NONE"
+side="BOTH"
 # Here's another dependency
 [[dependencies.esoterics]]
     modId="minecraft"
     mandatory=true
 # This version range declares a minimum of the current minecraft version up to but not including the next major version
-    versionRange="[1.19.3,1.20)"
+    versionRange="[1.19.4,1.20)"
     ordering="NONE"
     side="BOTH"
