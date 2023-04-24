@@ -5,15 +5,12 @@ import net.esotericsteam.esoterics.client.ManaHudOverlay;
 import net.esotericsteam.esoterics.networking.ModMessages;
 import net.esotericsteam.esoterics.networking.packet.ManaC2SPacket;
 import net.esotericsteam.esoterics.util.KeyBinding;
-import net.minecraft.ChatFormatting;
-import net.minecraft.client.Minecraft;
-import net.minecraft.network.chat.Component;
 import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.client.event.InputEvent;
 import net.minecraftforge.client.event.RegisterGuiOverlaysEvent;
 import net.minecraftforge.client.event.RegisterKeyMappingsEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
-import net.minecraftforge.client.event.InputEvent;
 
 public class ClientEvents {
     @Mod.EventBusSubscriber(modid = Esoterics.MOD_ID, value = Dist.CLIENT)

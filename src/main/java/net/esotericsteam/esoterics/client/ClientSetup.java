@@ -1,8 +1,8 @@
 package net.esotericsteam.esoterics.client;
 
 import net.esotericsteam.esoterics.Esoterics;
-import net.esotericsteam.esoterics.entity.render.SpellRenderer;
 import net.esotericsteam.esoterics.entity.ModEntityTypes;
+import net.esotericsteam.esoterics.entity.render.SpellRenderer;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.eventbus.api.SubscribeEvent;

@@ -1,37 +1,21 @@
 package net.esotericsteam.esoterics.item.custom;
 
-import net.esotericsteam.esoterics.entity.ModEntityTypes;
 import net.esotericsteam.esoterics.entity.custom.CrystalStormSpellProjectile;
 import net.esotericsteam.esoterics.entity.custom.SpellProjectile;
 import net.esotericsteam.esoterics.item.client.GauntletRenderer;
 import net.esotericsteam.esoterics.util.ModTags;
-import net.minecraft.Util;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
-import net.minecraft.core.Direction;
-import net.minecraft.core.Position;
-import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.Mth;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
-import net.minecraft.world.InteractionResult;
 import net.minecraft.world.InteractionResultHolder;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.MoverType;
-import net.minecraft.world.entity.monster.Blaze;
-import net.minecraft.world.entity.monster.Skeleton;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.entity.projectile.AbstractArrow;
-import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
-import net.minecraft.world.entity.projectile.Arrow;
-import net.minecraft.world.entity.projectile.SmallFireball;
-import net.minecraft.world.item.*;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ProjectileWeaponItem;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.client.extensions.common.IClientItemExtensions;
 import org.jetbrains.annotations.NotNull;
@@ -42,7 +26,6 @@ import software.bernie.geckolib.core.animation.*;
 import software.bernie.geckolib.core.object.PlayState;
 import software.bernie.geckolib.util.RenderUtils;
 
-import java.text.DecimalFormat;
 import java.util.function.Consumer;
 import java.util.function.Predicate;
 
@@ -56,6 +39,9 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
 
     public SpellProjectile createSpellProjectile(Level level, LivingEntity livingEntity, double d1, double d2, double d3) {
         // FIXME: Hard Coded to return only 1 type of spell.
+
+        // FIXME: There is a need for directionality of some entities,
+        //  like the amethyst shower, because it is pointy and should probably point at an enemy.
         return new CrystalStormSpellProjectile(
                 level,
                 livingEntity,
@@ -76,13 +62,7 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
             double d3 = (player.getZ() + vec3.z * 10) - player.getZ();
             double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
 
-            DecimalFormat df = new DecimalFormat("#.###");
-            player.sendSystemMessage(Component.literal("-------------"));
-            player.sendSystemMessage(Component.literal("vec3.x: " + df.format(vec3.x)));
-            player.sendSystemMessage(Component.literal("vec3.y: " + df.format(vec3.y)));
-            player.sendSystemMessage(Component.literal("vec3.z: " + df.format(vec3.z)));
-            player.sendSystemMessage(Component.literal("-------------"));
-
+            //These three operations are where the magic happens, literally.
             SpellProjectile spell = createSpellProjectile(
                     level,
                     player,
@@ -90,7 +70,6 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
                     d2,
                     player.getRandom().triangle(d3, 0.01F * d4)
             );
-
             spell.setPos(spell.getX(), player.getY(0.5D) + 0.5D, spell.getZ());
             level.addFreshEntity(spell);
 

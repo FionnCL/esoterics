@@ -5,7 +5,6 @@ import net.esotericsteam.esoterics.entity.ModEntityTypes;
 import net.esotericsteam.esoterics.item.ModCreativeModeTab;
 import net.esotericsteam.esoterics.item.ModItems;
 import net.esotericsteam.esoterics.networking.ModMessages;
-import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
