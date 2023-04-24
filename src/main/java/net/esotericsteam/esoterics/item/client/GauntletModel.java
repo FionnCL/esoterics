@@ -14,7 +14,7 @@ public class GauntletModel extends GeoModel<Gauntlet> {
 
     @Override
     public ResourceLocation getTextureResource(Gauntlet animatable) {
-        return new ResourceLocation(Esoterics.MOD_ID, "textures/item/gauntlet_texture.json");
+        return new ResourceLocation(Esoterics.MOD_ID, "textures/item/gauntlet_texture.png");
     }
 
     @Override

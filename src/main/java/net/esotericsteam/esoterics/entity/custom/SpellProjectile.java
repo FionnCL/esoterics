@@ -6,6 +6,7 @@ import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -31,6 +32,9 @@ public abstract class SpellProjectile extends AbstractHurtingProjectile {
 
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
+        if(!level.isClientSide) {
+            this.discard();
+        }
     }
 
     protected void onHit(HitResult hitResult) {
@@ -44,7 +48,7 @@ public abstract class SpellProjectile extends AbstractHurtingProjectile {
 
     @Override
     protected ParticleOptions getTrailParticle() {
-        return ParticleTypes.SMOKE;
+        return ParticleTypes.DRAGON_BREATH;
     }
 
     @Override

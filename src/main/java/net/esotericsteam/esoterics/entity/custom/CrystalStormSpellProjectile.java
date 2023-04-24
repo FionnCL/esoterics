@@ -38,7 +38,8 @@ public class CrystalStormSpellProjectile extends SpellProjectile {
         // This if-statement is boilerplate, and NECESSARY!
         // It stops client-side events and spells colliding with each other.
         if(!level.isClientSide && !(entityHitResult.getEntity() instanceof Projectile)) {
-            entityHitResult.getEntity().hurt(damageSources().magic(), 1);
+            //TODO: Add SpellBuilder/Spell function
+            entityHitResult.getEntity().hurt(damageSources().magic(), 10);
         }
     }
 

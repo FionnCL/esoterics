@@ -42,6 +42,8 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
 
         // FIXME: There is a need for directionality of some entities,
         //  like the amethyst shower, because it is pointy and should probably point at an enemy.
+        //
+        // FIXME: SpellBuilder can handle this.
         return new CrystalStormSpellProjectile(
                 level,
                 livingEntity,
@@ -70,6 +72,7 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
                     d2,
                     player.getRandom().triangle(d3, 0.01F * d4)
             );
+
             spell.setPos(spell.getX(), player.getY(0.5D) + 0.5D, spell.getZ());
             level.addFreshEntity(spell);
 
