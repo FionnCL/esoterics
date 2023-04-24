@@ -1,7 +1,7 @@
 {
   "replace": false,
   "values": [
-    "esoterics:spell_projectiles",
-    "esoterics:crystal_storm_spell_projectiles"
+    "esoterics:spell_projectile",
+    "esoterics:crystal_storm_spell_projectile"
   ]
 }

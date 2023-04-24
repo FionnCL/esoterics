@@ -1,7 +1,10 @@
 {
   "item.esoterics.incantation_bowl": "Incantation Bowl",
-  "item.esoterics.gauntlet": "The Gauntlet",
+  "item.esoterics.gauntlet": "Gauntlet",
+
   "item.esoterics.esoterics_tab": "Esoterics",
+
+  "entity.esoterics.crystal_storm_spell_projectile": "Crystal Storm Projectile",
 
   "gui.esoterics.mana": "Mana",
   "key.category.esoterics.tutorial": "Esoterics",

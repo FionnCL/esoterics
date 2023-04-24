@@ -22,6 +22,21 @@ public abstract class SpellProjectile extends AbstractHurtingProjectile {
         super(entityType, livingEntity, d0, d1, d2, level);
     }
 
+    protected void onHitEntity(EntityHitResult entityHitResult) {
+        super.onHitEntity(entityHitResult);
+        if(!level.isClientSide) {
+            this.discard();
+        }
+    }
+
+    protected void onHitBlock(BlockHitResult blockHitResult) {
+        super.onHitBlock(blockHitResult);
+    }
+
+    protected void onHit(HitResult hitResult) {
+        super.onHit(hitResult);
+    }
+
     @Override
     protected boolean shouldBurn() {
         return false;
@@ -39,19 +54,4 @@ public abstract class SpellProjectile extends AbstractHurtingProjectile {
 
     @Override
     protected void defineSynchedData() {}
-
-    protected void onHitEntity(EntityHitResult entityHitResult) {
-        super.onHitEntity(entityHitResult);
-        if(!level.isClientSide) {
-            this.discard();
-        }
-    }
-
-    protected void onHitBlock(BlockHitResult blockHitResult) {
-        super.onHitBlock(blockHitResult);
-    }
-
-    protected void onHit(HitResult hitResult) {
-        super.onHit(hitResult);
-    }
 }

@@ -6,6 +6,7 @@ import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
@@ -34,8 +35,10 @@ public class CrystalStormSpellProjectile extends SpellProjectile {
     // TODO: Edit this test function.
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
-        if(!level.isClientSide) {
-            level.explode(this, this.getX(), this.getY(), this.getZ(), 3.0f, true, Level.ExplosionInteraction.BLOCK);
+        // This if-statement is boilerplate, and NECESSARY!
+        // It stops client-side events and spells colliding with each other.
+        if(!level.isClientSide && !(entityHitResult.getEntity() instanceof Projectile)) {
+            entityHitResult.getEntity().hurt(damageSources().magic(), 1);
         }
     }
 
