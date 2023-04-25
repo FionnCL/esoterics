@@ -1,14 +1,12 @@
 package net.esotericsteam.esoterics.item.custom;
 
 import net.esotericsteam.esoterics.SpellBuilding.Spell;
-import net.esotericsteam.esoterics.entity.custom.CrystalStormSpellProjectile;
 import net.esotericsteam.esoterics.entity.custom.SpellProjectile;
 import net.esotericsteam.esoterics.item.client.GauntletRenderer;
 import net.esotericsteam.esoterics.util.ModTags;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
-import net.esotericsteam.esoterics.SpellBuilding.SpellBuilder;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
@@ -46,14 +44,18 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
         super(properties);
     }
 
-    public SpellProjectile createSpellProjectile(Level level, LivingEntity livingEntity, double d1, double d2, double d3) {
-        return new CrystalStormSpellProjectile(
+    public Spell createSpellProjectile(Level level, LivingEntity livingEntity, double d1, double d2, double d3) {
+        // TODO:
+        //  -Get modifiers.
+        //  -Get base.
+        return new Spell(
                 level,
                 livingEntity,
                 d1,
                 d2,
                 d3
-        );
+        ) {
+        };
     }
 
     @Override
@@ -68,7 +70,7 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
             double d4 = Math.sqrt(Math.sqrt(d0)) * 0.5D;
 
             //These three operations are where the magic happens, literally.
-            SpellProjectile spell = createSpellProjectile(
+            Spell spell = createSpellProjectile(
                     level,
                     player,
                     player.getRandom().triangle(d1, 0.01F * d4),
