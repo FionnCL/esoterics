@@ -1,5 +1,6 @@
 package net.esotericsteam.esoterics.item.custom;
 
+import net.esotericsteam.esoterics.SpellBuilding.Spell;
 import net.esotericsteam.esoterics.entity.custom.CrystalStormSpellProjectile;
 import net.esotericsteam.esoterics.entity.custom.SpellProjectile;
 import net.esotericsteam.esoterics.item.client.GauntletRenderer;
@@ -7,8 +8,8 @@ import net.esotericsteam.esoterics.util.ModTags;
 import net.minecraft.client.renderer.BlockEntityWithoutLevelRenderer;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.esotericsteam.esoterics.SpellBuilding.SpellBuilder;
 import net.minecraft.stats.Stats;
-import net.minecraft.util.RandomSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResultHolder;
 import net.minecraft.world.entity.LivingEntity;
@@ -30,20 +31,22 @@ import java.util.function.Consumer;
 import java.util.function.Predicate;
 
 public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
+//    private SpellBuilder spellBuilder = new SpellBuilder();
+
+    //Below should save the spell DATA such as type and modifiers.
+//    public SpellProjectile savedSpell0 = spellBuilder.saveSpell(CrystalStormSpellProjectile);
+//    public SpellProjectile savedSpell1;
+//    public SpellProjectile savedSpell2;
+//    public SpellProjectile savedSpell3;
+//    public SpellProjectile savedSpell4;
+
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
-    protected final RandomSource random = RandomSource.create();
 
     public Gauntlet(Properties properties) {
         super(properties);
     }
 
     public SpellProjectile createSpellProjectile(Level level, LivingEntity livingEntity, double d1, double d2, double d3) {
-        // FIXME: Hard Coded to return only 1 type of spell.
-
-        // FIXME: There is a need for directionality of some entities,
-        //  like the amethyst shower, because it is pointy and should probably point at an enemy.
-
-        // FIXME: SpellBuilder can handle this.
         return new CrystalStormSpellProjectile(
                 level,
                 livingEntity,

@@ -1,15 +1,20 @@
 package net.esotericsteam.esoterics.SpellBuilding;
 
-import net.esotericsteam.esoterics.entity.custom.SpellProjectile;
-
 public class SpellModifiers {
-    String NAME;
-    int[] acceptedProjectilesIDs;
-
-    public SpellModifiers(String modifier, int[] acceptedProjectilesIDs){
-        this.NAME = modifier;
-        this.acceptedProjectilesIDs = acceptedProjectilesIDs;
-    }
-
-    public boolean canUseModifier(){ return true; }
+    // DEPRECATED, FOR NOW!
+//    String name;
+//    String[] acceptedProjectilesIDs;
+//    int modifierCost;
+//    int manaCost;
+//
+//    public SpellModifiers(String modifier, String[] acceptedProjectilesIDs, int modifierCost, int manaCost){
+//        this.name = modifier;
+//        this.acceptedProjectilesIDs = acceptedProjectilesIDs;
+//        this.modifierCost = modifierCost;
+//        this.manaCost = manaCost;
+//    }
+//
+//    public boolean canUseModifier(){
+//        return false;
+//    }
 }

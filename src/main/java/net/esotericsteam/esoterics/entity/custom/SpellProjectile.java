@@ -1,6 +1,5 @@
 package net.esotericsteam.esoterics.entity.custom;
 
-import net.esotericsteam.esoterics.SpellBuilding.SpellModifiers;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
