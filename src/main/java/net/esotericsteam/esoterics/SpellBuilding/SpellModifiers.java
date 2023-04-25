@@ -1,7 +1,6 @@
 package net.esotericsteam.esoterics.SpellBuilding;
 
 public class SpellModifiers {
-    // DEPRECATED, FOR NOW!
 //    String name;
 //    String[] acceptedProjectilesIDs;
 //    int modifierCost;
