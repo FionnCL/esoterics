@@ -42,7 +42,7 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
 
         // FIXME: There is a need for directionality of some entities,
         //  like the amethyst shower, because it is pointy and should probably point at an enemy.
-        //
+
         // FIXME: SpellBuilder can handle this.
         return new CrystalStormSpellProjectile(
                 level,

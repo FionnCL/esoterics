@@ -1,12 +1,12 @@
 package net.esotericsteam.esoterics.entity.custom;
 
+import net.esotericsteam.esoterics.SpellBuilding.SpellModifiers;
 import net.minecraft.core.particles.ParticleOptions;
 import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.network.protocol.Packet;
 import net.minecraft.network.protocol.game.ClientGamePacketListener;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.monster.Guardian;
 import net.minecraft.world.entity.projectile.AbstractHurtingProjectile;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.BlockHitResult;
@@ -15,6 +15,8 @@ import net.minecraft.world.phys.HitResult;
 import net.minecraftforge.network.NetworkHooks;
 
 public abstract class SpellProjectile extends AbstractHurtingProjectile {
+    public static String SPELL_ID = "default";
+
     public SpellProjectile(EntityType<? extends SpellProjectile> entityType, Level level) {
         super(entityType, level);
     }

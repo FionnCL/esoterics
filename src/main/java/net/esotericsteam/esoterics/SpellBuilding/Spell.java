@@ -1,11 +1,14 @@
-package net.esotericsteam.esoterics;
+package net.esotericsteam.esoterics.SpellBuilding;
 
 import net.esotericsteam.esoterics.entity.custom.CrystalStormSpellProjectile;
 import net.esotericsteam.esoterics.entity.custom.SpellProjectile;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
+import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.phys.BlockHitResult;
 import net.minecraft.world.phys.EntityHitResult;
+import net.minecraft.world.phys.HitResult;
 
 public class Spell extends SpellProjectile{
     public Spell(EntityType<? extends SpellProjectile> entityType, Level level) {
@@ -16,13 +19,6 @@ public class Spell extends SpellProjectile{
         super(entityType, livingEntity, d0, d1, d2, level);
     }
 
-    public boolean spellEffect(EntityHitResult entityHitResult, SpellProjectile spellProjectile, SpellModifier spellModifier) {
-        // Below could be done by spell builder.
-        // SpellBuilder can hold saved spells, perhaps.
-        if (spellProjectile instanceof CrystalStormSpellProjectile) {
-            if(spellModifier instanceof SpellModifier)
-                return entityHitResult.getEntity().hurt(damageSources().magic(), 10);
-        }
-        return false;
-    }
+    // This should purely be shot out of the gauntlet. It is an entity.
+    // Perhaps has an on hit method.
 }
