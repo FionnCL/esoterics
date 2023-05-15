@@ -15,11 +15,11 @@ public class SpellBuilder {
         return spell;
     }
 
-    public void getEntityEffects(){
-        // do something to an entity.
-    }
-
-    public void getBlockEffects(){
-        // do something to a block.
-    }
+//    public void getEntityEffects(){
+//        // do something to an entity.
+//    }
+//
+//    public void getBlockEffects(){
+//        // do something to a block.
+//    }
 }

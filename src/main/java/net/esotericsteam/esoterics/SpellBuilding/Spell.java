@@ -28,13 +28,13 @@ public class Spell extends SpellProjectile{
     @Override
     protected void onHitEntity(EntityHitResult entityHitResult) {
         super.onHitEntity(entityHitResult);
-        spellBuilder.getEntityEffects();
+        //spellBuilder.getEntityEffects();
     }
 
     @Override
     protected void onHitBlock(BlockHitResult blockHitResult) {
         super.onHitBlock(blockHitResult);
-        spellBuilder.getBlockEffects();
+        //spellBuilder.getBlockEffects();
     }
 
     @Override

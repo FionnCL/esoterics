@@ -1,10 +1,13 @@
 package net.esotericsteam.esoterics;
 
 import com.mojang.logging.LogUtils;
+import net.esotericsteam.esoterics.block.ModBlocks;
 import net.esotericsteam.esoterics.entity.ModEntityTypes;
 import net.esotericsteam.esoterics.item.ModCreativeModeTab;
 import net.esotericsteam.esoterics.item.ModItems;
 import net.esotericsteam.esoterics.networking.ModMessages;
+import net.minecraft.client.renderer.ItemBlockRenderTypes;
+import net.minecraft.client.renderer.RenderType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.CreativeModeTabEvent;
@@ -28,6 +31,7 @@ public class Esoterics
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
         ModEntityTypes.register(modEventBus);
 
         modEventBus.addListener(this::commonSetup);
@@ -53,6 +57,10 @@ public class Esoterics
             event.accept(ModItems.GAUNTLET);
 
             // Armour
+
+            // Crops & Yields
+            event.accept(ModItems.FLESH_SEEDS);
+            event.accept(ModItems.FLESH);
         }
     }
 
@@ -63,7 +71,7 @@ public class Esoterics
         @SubscribeEvent
         public static void onClientSetup(FMLClientSetupEvent event)
         {
-
+            ItemBlockRenderTypes.setRenderLayer(ModBlocks.FLESH_CROP.get(), RenderType.cutout());
         }
     }
 }

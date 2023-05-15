@@ -14,6 +14,6 @@ public class ClientSetup {
     @SubscribeEvent
     public static void doSetup(FMLClientSetupEvent event) {
         Object EntityInit;
-        EntityRenderers.register(ModEntityTypes.CRYSTAL_STORM_SPELL_PROJECTILE.get(), SpellRenderer::new);
+        EntityRenderers.register(ModEntityTypes.SPELL.get(), SpellRenderer::new);
     }
 }
