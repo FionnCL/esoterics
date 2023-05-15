@@ -10,6 +10,7 @@ public class SpellBuilder {
     String[] modifiers = new String[]{ MODIFIER_DAMAGE };
 
 
+    // Should take projectile + modifiers and return spell.
     public Spell saveSpell(Spell spell){
         return spell;
     }

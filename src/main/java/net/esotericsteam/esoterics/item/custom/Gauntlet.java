@@ -32,11 +32,11 @@ public class Gauntlet extends ProjectileWeaponItem implements GeoItem {
 //    private SpellBuilder spellBuilder = new SpellBuilder();
 
     //Below should save the spell DATA such as type and modifiers.
-//    public SpellProjectile savedSpell0 = spellBuilder.saveSpell(CrystalStormSpellProjectile);
-//    public SpellProjectile savedSpell1;
-//    public SpellProjectile savedSpell2;
-//    public SpellProjectile savedSpell3;
-//    public SpellProjectile savedSpell4;
+//    public Spell savedSpell0 = spellBuilder.saveSpell(CrystalStormSpellProjectile);
+//    public Spell savedSpell1;
+//    public Spell savedSpell2;
+//    public Spell savedSpell3;
+//    public Spell savedSpell4;
 
     private final AnimatableInstanceCache cache = new SingletonAnimatableInstanceCache(this);
 
